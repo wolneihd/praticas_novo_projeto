@@ -4,6 +4,7 @@
  */
 package controle;
 
+import dao.TipoContatoDao;
 import interfaces.InterfaceControle;
 import modelo.TipoContatoModelo;
 
@@ -14,14 +15,21 @@ import modelo.TipoContatoModelo;
 public class TipoContatoControle implements InterfaceControle {
 
     TipoContatoModelo tcm = new TipoContatoModelo();
+    TipoContatoDao tcd = new TipoContatoDao();
     
     @Override
     public void salvarControle(Object... valor) {
-        tcm.setId((int) valor[0]);
+        
+        if ("".equals(valor[0])) {
+            tcm.setId(0);  
+        } else {
+            tcm.setId((int) valor[0]);            
+        }       
+
         tcm.setDescricao((String) valor[1]);
-        System.out.println("id: " + tcm.getId());
-        System.out.println("descrição: " + tcm.getDescricao());
+        
         // Enviar as informações para o DAO
+        tcd.salvarDao(tcm);
     }
 
     @Override
