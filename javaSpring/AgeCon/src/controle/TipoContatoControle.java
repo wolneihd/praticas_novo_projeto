@@ -23,7 +23,8 @@ public class TipoContatoControle implements InterfaceControle {
         if ("".equals(valor[0])) {
             tcm.setId(0);
         } else {
-            tcm.setId((int) valor[0]);
+            // tcm.setId((int) valor[0]);
+            tcm.setId(Integer.parseInt(valor[0].toString()));
         }
 
         tcm.setDescricao((String) valor[1]);
@@ -34,7 +35,7 @@ public class TipoContatoControle implements InterfaceControle {
 
     @Override
     public void excluirControle(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        tcd.excluirDao(id);
     }
 
     @Override

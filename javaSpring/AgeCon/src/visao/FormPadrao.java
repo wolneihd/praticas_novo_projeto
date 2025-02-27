@@ -4,7 +4,12 @@
  */
 package visao;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -18,19 +23,23 @@ abstract public class FormPadrao extends javax.swing.JInternalFrame {
 
     JLabel jlConsulta;
     JTextField jtfConsulta;
-    
-    
+
     // Métodos abstratos implementados pela classe filha:
     abstract public void inicializarComponentes();
+
     abstract public void salvarVisao();
-    abstract public void criarTabela();  
+
+    abstract public void criarTabela();
+
     abstract public void consultaVisao();
-    
+    abstract public void atualizarFormulario();
+    abstract public void excluirVisao();
+
     // atributos para criação de tabela:
     JTable tabela;
     DefaultTableModel modelo = new DefaultTableModel();
-    Tabela utilTabela = new Tabela();    
-    
+    Tabela utilTabela = new Tabela();
+
     /**
      * Creates new form FormPadrao
      */
@@ -38,20 +47,43 @@ abstract public class FormPadrao extends javax.swing.JInternalFrame {
         initComponents();
         inicializarComponentes();
         criarTabela();
-        
+
         jbSalvar.setEnabled(false);
         jbCancelar.setEnabled(false);
-        
+
         jtfId.setEnabled(false);
         jtfDescricao.setEnabled(false);
-        
+
         jlConsulta = new JLabel("Consulta");
         jlConsulta.setBounds(9, 5, 50, 15);
         jpnConsulta.add(jlConsulta);
-        
+
         jtfConsulta = new JTextField();
         jtfConsulta.setBounds(60, 5, 500, 25);
         jpnConsulta.add(jtfConsulta);
+
+        jtfConsulta.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                consultaVisao();
+            }
+        });
+        
+        tabela.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                atualizarFormulario();
+            }
+        });
+        
+        // evento de escuta para teclas de subir/descer na tabela:
+        tabela.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                atualizarFormulario();
+            }
+        });
+        
     }
 
     /**
@@ -98,6 +130,11 @@ abstract public class FormPadrao extends javax.swing.JInternalFrame {
         jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/remove.png"))); // NOI18N
         jbExcluir.setMnemonic('E');
         jbExcluir.setText("Excluir");
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
 
         jbSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salvar.png"))); // NOI18N
         jbSalvar.setMnemonic('S');
@@ -238,7 +275,7 @@ abstract public class FormPadrao extends javax.swing.JInternalFrame {
 
     private void jbNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNovoActionPerformed
         // TODO add your handling code here:
-        habilitaBotoes(false); 
+        habilitaBotoes(false);
         habilitarCamposEdicao(true);
         jtfDescricao.requestFocus();
     }//GEN-LAST:event_jbNovoActionPerformed
@@ -250,7 +287,7 @@ abstract public class FormPadrao extends javax.swing.JInternalFrame {
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
         // TODO add your handling code here:
-        habilitaBotoes(false);  
+        habilitaBotoes(false);
         habilitarCamposEdicao(true);
         jtfDescricao.requestFocus();
     }//GEN-LAST:event_jbAlterarActionPerformed
@@ -259,8 +296,9 @@ abstract public class FormPadrao extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         habilitaBotoes(true);
         habilitarCamposEdicao(false);
-        salvarVisao();        
+        salvarVisao();
         limparCampos();
+        consultaVisao();
     }//GEN-LAST:event_jbSalvarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
@@ -273,19 +311,30 @@ abstract public class FormPadrao extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfIdActionPerformed
 
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir?", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            excluirVisao();
+            consultaVisao();
+            limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Exclusão cancelada.");
+        }
+    }//GEN-LAST:event_jbExcluirActionPerformed
+
     public void habilitaBotoes(boolean estado) {
         jbNovo.setEnabled(estado);
         jbAlterar.setEnabled(estado);
         jbExcluir.setEnabled(estado);
-        
+
         jbSalvar.setEnabled(!estado);
-        jbCancelar.setEnabled(!estado);           
+        jbCancelar.setEnabled(!estado);
     }
-    
+
     public void habilitarCamposEdicao(boolean estado) {
         jtfDescricao.setEnabled(estado);
     }
-    
+
     public void limparCampos() {
         jtfDescricao.setText("");
     }
