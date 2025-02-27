@@ -5,7 +5,10 @@
 package visao;
 
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import util.Tabela;
 
 /**
  *
@@ -20,7 +23,13 @@ abstract public class FormPadrao extends javax.swing.JInternalFrame {
     // Métodos abstratos implementados pela classe filha:
     abstract public void inicializarComponentes();
     abstract public void salvarVisao();
+    abstract public void criarTabela();  
+    abstract public void consultaVisao();
     
+    // atributos para criação de tabela:
+    JTable tabela;
+    DefaultTableModel modelo = new DefaultTableModel();
+    Tabela utilTabela = new Tabela();    
     
     /**
      * Creates new form FormPadrao
@@ -28,6 +37,7 @@ abstract public class FormPadrao extends javax.swing.JInternalFrame {
     public FormPadrao() {
         initComponents();
         inicializarComponentes();
+        criarTabela();
         
         jbSalvar.setEnabled(false);
         jbCancelar.setEnabled(false);
@@ -290,7 +300,7 @@ abstract public class FormPadrao extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbNovo;
     private javax.swing.JButton jbSalvar;
     private javax.swing.JPanel jpnBotoes;
-    private javax.swing.JPanel jpnConsulta;
+    public javax.swing.JPanel jpnConsulta;
     public javax.swing.JPanel jpnFormulario;
     public javax.swing.JTextField jtfDescricao;
     public javax.swing.JTextField jtfId;

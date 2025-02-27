@@ -4,8 +4,8 @@
  */
 package visao;
 
-import dao.ConexaoBanco;
 import javax.swing.JFrame;
+import util.PosicaoFormulario;
 
 /**
  *
@@ -13,6 +13,9 @@ import javax.swing.JFrame;
  */
 public class Principal extends javax.swing.JFrame {
 
+    
+    PosicaoFormulario form = new PosicaoFormulario();
+    
     /**
      * Creates new form Principal
      */
@@ -31,7 +34,6 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktop = new javax.swing.JDesktopPane();
-        jButton1 = new javax.swing.JButton();
         jmbBarraMenu = new javax.swing.JMenuBar();
         jmArquivo = new javax.swing.JMenu();
         jmCadastro = new javax.swing.JMenu();
@@ -46,30 +48,15 @@ public class Principal extends javax.swing.JFrame {
         setTitle("AGECON - Agenda de Contatos");
         setResizable(false);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jDesktop.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout jDesktopLayout = new javax.swing.GroupLayout(jDesktop);
         jDesktop.setLayout(jDesktopLayout);
         jDesktopLayout.setHorizontalGroup(
             jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jButton1)
-                .addContainerGap(693, Short.MAX_VALUE))
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         jDesktopLayout.setVerticalGroup(
             jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jButton1)
-                .addContainerGap(519, Short.MAX_VALUE))
+            .addGap(0, 561, Short.MAX_VALUE)
         );
 
         jmArquivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arquivo.png"))); // NOI18N
@@ -164,23 +151,23 @@ public class Principal extends javax.swing.JFrame {
 
     private void jmiBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBairroActionPerformed
         // TODO add your handling code here:
-        BairroVisao tela = new BairroVisao();
-        jDesktop.add(tela);
-        tela.setVisible(true);
+        // BairroVisao tela = new BairroVisao();;;
+        // jDesktop.add(tela);
+        // tela.setVisible(true);
+        
+        BairroVisao tela;
+        form.abrirFormulario(tela = new BairroVisao(), jDesktop);
     }//GEN-LAST:event_jmiBairroActionPerformed
 
     private void jmiTipoContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiTipoContatoActionPerformed
         // TODO add your handling code here:
-        TipoContatoVisao tela = new TipoContatoVisao();
-        jDesktop.add(tela);
-        tela.setVisible(true);
+        //TipoContatoVisao tela = new TipoContatoVisao();
+        //jDesktop.add(tela);
+        //tela.setVisible(true);
+        
+        TipoContatoVisao tela;
+        form.abrirFormulario(tela = new TipoContatoVisao(), jDesktop);
     }//GEN-LAST:event_jmiTipoContatoActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        ConexaoBanco conexao = new ConexaoBanco();
-        conexao.abreConexao();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,7 +205,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktop;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu jmArquivo;

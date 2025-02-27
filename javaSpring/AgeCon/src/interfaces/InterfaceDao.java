@@ -16,6 +16,6 @@ public interface InterfaceDao {
     public void salvarDao(Object... valor);
     public void excluirDao(int id);
     public void carregarComboBoxDao(Object... valor) throws SQLException;
-    public void consultarDao(JComboBox itens) throws SQLException;
+    public void consultarDao(Object... valor) throws SQLException;
     
 }

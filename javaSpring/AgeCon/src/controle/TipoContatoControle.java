@@ -16,18 +16,18 @@ public class TipoContatoControle implements InterfaceControle {
 
     TipoContatoModelo tcm = new TipoContatoModelo();
     TipoContatoDao tcd = new TipoContatoDao();
-    
+
     @Override
     public void salvarControle(Object... valor) {
-        
+
         if ("".equals(valor[0])) {
-            tcm.setId(0);  
+            tcm.setId(0);
         } else {
-            tcm.setId((int) valor[0]);            
-        }       
+            tcm.setId((int) valor[0]);
+        }
 
         tcm.setDescricao((String) valor[1]);
-        
+
         // Enviar as informações para o DAO
         tcd.salvarDao(tcm);
     }
@@ -41,5 +41,16 @@ public class TipoContatoControle implements InterfaceControle {
     public void carregarComboBox() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+    @Override
+    public void consultarControle(Object... valor) {
+
+        try {
+            tcd.consultarDao(valor);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
 }
