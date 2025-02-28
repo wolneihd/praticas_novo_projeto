@@ -1,6 +1,8 @@
 package POO_java.model;
 
-public class Funcionario extends Pessoa { 
+import POO_java.interfaces.Metodos;
+
+public class Funcionario extends Pessoa implements Metodos { 
     
     private String cargo;
 
@@ -19,6 +21,20 @@ public class Funcionario extends Pessoa {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    @Override
+    public String apresentar() {
+        return "nome: " + getNome() + " idade: " + getIdade() + " cargo: " + getCargo();
+    }
+
+    @Override
+    public String verificarMaioridade() {
+        if (getIdade() >= 18 ) {
+            return "maior de idade!";
+        } else {
+            return "menor de idade!";
+        }
     }
 
 }

@@ -1,8 +1,6 @@
 package POO_java.model;
 
-import POO_java.interfaces.Metodos;
-
-public class Pessoa implements Metodos {
+abstract public class Pessoa {
 
     private String nome;
     private int idade;
@@ -29,10 +27,8 @@ public class Pessoa implements Metodos {
     public void setIdade(int idade) {
         this.idade = idade;
     }
-
-    @Override
-    public String mostrarDados() {
-        return "Pessoa: nome, idade: " + getNome() + " " + getIdade();
-    }
+    
+    // METODOS ABSTRATOS:
+    abstract public String apresentar();
 
 }

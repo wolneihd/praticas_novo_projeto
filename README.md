@@ -22,8 +22,12 @@ Já tenho conhecimento em Java Spring Boot, SQL e Angular. Estarei focando inici
   - Bônus: Java EE - Mapeamento objeto-relacional com JPA / Hibernate
   - [Curso na Udemy](https://www.udemy.com/course/java-curso-completo/)
 
-### Java Swing (Em andamento)
+### Java Swing (Finalizado)
 - **Projeto agenda com SWING (YouTube)**
   - [Playlist no YouTube](https://www.youtube.com/playlist?list=PLwH4Cv_WLhLbc4H-aOh3xFywPGxhaso_b)
+
+### Testes - JUnit e Mockito (Finalizado)
+- **COMEÇANDO com TESTES UNITÁRIOS no JAVA SPRING | Junit + Mockito**
+  - [Aulão no YouTube](https://www.youtube.com/watch?v=T6ChO8LQxRE&t=365s)
 
 
